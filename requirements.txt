@@ -1,0 +1,89 @@
+# Consolidated pip-installable dependencies across all skills in this repo.
+# Install what you need for the skills you're actually using, not everything —
+# this list spans 25 skills and many are mutually exclusive by research area.
+# See docs/getting-started.md for guidance, and each SKILL.md's `compatibility`
+# frontmatter field for version notes.
+
+# Core (used across most analysis/modeling/stats skills)
+numpy
+scipy
+pandas
+matplotlib
+scikit-learn
+statsmodels
+networkx
+
+# electrophysiology, fnirs, sleep-eeg (EEG/MEG/intracranial/fNIRS/PSG)
+mne
+mne-connectivity
+mne-nirs
+yasa
+
+# mri, pet-imaging (fMRI/structural/diffusion/PET)
+nilearn
+nibabel
+dipy
+nimare            # mri: meta-analysis
+
+# spike-recording, connectomics-em
+spikeinterface[full]
+# Plus the sorter itself, e.g.: pip install spikeinterface[kilosort2_5]
+# Many sorters additionally require MATLAB or a compiled binary.
+cloudvolume
+neuroglancer
+
+# optical-imaging (calcium imaging / fiber photometry / voltage imaging)
+suite2p
+# caiman is conda-distributed rather than a plain pip install — see its own docs
+
+# neuro-decoding-encoding (population dynamics deep learning reference)
+cebra
+# lfads-torch or the original LFADS repo — not a standard pip package, see the
+# population-dynamics-deep-learning.md reference for setup
+
+# cognitive-computational-modeling
+pymc
+arviz
+# hBayesDM is an R package (install via R, not pip) — see that skill's SKILL.md
+
+# clinical-biomarkers-ml
+shap
+
+# neuro-stats (clinical-stats reference)
+lifelines
+neuroCombat
+
+# animal-behavior-tracking
+deeplabcut
+sleap
+# Both require GPU acceleration for practical training times.
+
+# eye-tracking
+pyedfread     # EyeLink EDF parsing specifically
+
+# experimental-design
+psychopy
+pylsl         # Lab Streaming Layer, for multi-device sync
+
+# Dataset acquisition (neuro-data-standards)
+dandi
+pynwb
+fsspec            # streaming an NWB file without full download
+allensdk
+openneuro-py
+pybids
+
+# --- Not installable via pip — see the relevant SKILL.md for setup ---
+# fMRIPrep (mri/references/fmri.md): Docker or Singularity, plus a free
+#   FreeSurfer license file.
+# FreeSurfer/FastSurfer (mri/references/structural.md): separate install,
+#   required for cortical reconstruction and as a MEG/EEG source-localization
+#   dependency (electrophysiology/references/meg.md).
+# Brian2/NEST/NEURON (computational-modeling): brian2 is pip-installable
+#   (add `brian2` above if using it); NEST and NEURON have their own installers.
+# CAT12/SPM (mri/references/structural.md, VBM): MATLAB-based, separate install.
+# SimNIBS (brain-stimulation/references/tes.md): separate installer, not pip.
+# QuPath (histology-and-anatomical-tracing): standalone Java application.
+# Lead-DBS (brain-stimulation/references/clinical-stimulation.md): MATLAB-based
+#   toolbox, separate install.
+# hBayesDM (cognitive-computational-modeling): R package — install via R.
