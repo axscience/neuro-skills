@@ -35,46 +35,60 @@ read Agent Skills:
 git clone https://github.com/axscience/neuro-skills.git
 ```
 
-- **Claude Code / Cursor / any Agent-Skills-compatible tool**: point it at this repo's root (or copy
-  individual top-level skill folders into your tool's skills directory) and the agent picks up
-  `SKILL.md` automatically.
-- **A custom platform's own agent**: read `SKILL.md` frontmatter (see [CONTRIBUTING.md](CONTRIBUTING.md)
-  for the schema) to retrieve and inject skill content into your own prompt/tool pipeline.
+- **Claude Code**: the repo ships a plugin manifest at [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)
+  that lists every top-level skill directory, so Claude Code auto-discovers all 37 skills. Install the
+  local clone as a plugin, or point Claude Code at the repo directory.
+- **Cursor / Windsurf**: drop-in rules files live in [`integration-templates/`](integration-templates/) —
+  copy `cursor-rules.md` or `windsurf-rules.md` into your project so the editor knows to consult
+  `registry.yaml` and load the matching `SKILL.md`.
+- **ChatGPT (Custom GPT)**: see [docs/getting-started.md](docs/getting-started.md) for exactly which
+  files to upload (`registry.yaml` + the SKILL.md files for your domain) and a system-prompt snippet.
+- **A custom platform's own agent**: read [`registry.yaml`](registry.yaml) to discover skills, then
+  read the matching `SKILL.md` (frontmatter schema in [CONTRIBUTING.md](CONTRIBUTING.md)) and inject
+  it into your prompt/tool pipeline.
 
-Nothing in the skill format assumes a specific execution environment, sandbox, or backend — that's a
-decision for whatever's consuming the repo, not something this repo bakes in.
-
-This repo is skills (knowledge), not tools (capability) — see [docs/getting-started.md](docs/getting-started.md)
-for what that distinction means in practice, what environment/tool access you still need on top of
-these skills, and setup notes for Claude Code, ChatGPT, and a self-hosted local LLM.
+Nothing in the skill format assumes a specific execution environment, sandbox, or backend. This repo
+is skills (knowledge), not tools (capability) — see [docs/getting-started.md](docs/getting-started.md)
+for what that distinction means and what environment/tool access you still need on top of these skills.
 
 ## Structure
 
+Skills are **modality/technique-first**. Most are flat (a single `SKILL.md` plus optional
+`references/`); a few modalities with genuinely competing tools are **two-tier** — a category router
+`SKILL.md` over per-tool/per-method leaf skills, each loaded on demand.
+
 ```
-<modality-or-technique>/
-  SKILL.md               # frontmatter + overview + core usage + routing table + validation
-  references/               # optional — one file per sub-topic, loaded on demand
+<category-or-skill>/
+  SKILL.md               # flat skill, OR a category router with a "which leaf to load" table
+  references/               # (flat skills) one file per sub-topic, loaded on demand
     <sub-topic>.md
+  <leaf>/SKILL.md           # (two-tier categories) a per-tool/per-method leaf skill
 docs/
-  skills.md               # full index, by modality and by technique
-  getting-started.md       # skill-vs-tool distinction, environment setup per host
-plugin.json                # agent-plugins.org manifest
+  skills.md               # full index, by modality and technique, with ownership notes
+  getting-started.md       # skill-vs-tool distinction; Claude Code / ChatGPT / local-LLM setup
+registry.yaml              # machine-readable discovery index — one entry per skill (agent-consumable)
+.claude-plugin/plugin.json # Claude Code plugin manifest (lists all skill directories)
+integration-templates/      # drop-in Cursor / Windsurf rules
 requirements.txt             # consolidated pip dependencies across all skills
-scan_skills.py                # validator — frontmatter schema, modality-folder consistency, dead links
+scan_skills.py                # validator — frontmatter, sections, links, and registry consistency
 ```
+
+Two-tier categories today: `optical-imaging` (suite2p / caiman / fiber-photometry / voltage-imaging),
+`spike-recording` (spikeinterface / spike-train-stats), `animal-behavior-tracking` (deeplabcut /
+sleap / kinematics), `cognitive-computational-modeling` (hbayesdm / ddm-python / pymc-cognitive).
 
 ## Status
 
-25 top-level skills, 22 nested references — spanning EEG, MEG, intracranial (ECoG/sEEG/DBS-LFP),
-fNIRS, sleep PSG, fMRI, structural and diffusion MRI, PET, spike recording, calcium imaging, fiber
-photometry, voltage imaging, animal behavior tracking, human psychophysics, eye tracking,
-psychophysiology (incl. EMG), experimental design, optogenetics/chemogenetics, human/clinical brain
-stimulation, histology and anatomical tracing, EM connectomics, biophysical and cognitive
-computational modeling, data standards (BIDS/NWB) and dataset access, statistics, connectivity,
-decoding/encoding, clinical biomarker ML, literature search, and figures. See
-[docs/skills.md](docs/skills.md) for the full index and ownership notes on where overlapping content
-belongs. See [CONTRIBUTING.md](CONTRIBUTING.md) to add a skill — known remaining gaps are listed at
-the bottom of the skill index.
+**37 skills** (21 flat + 4 two-tier categories + 12 leaves) plus 22 nested references — spanning EEG,
+MEG, intracranial (ECoG/sEEG/DBS-LFP), fNIRS, sleep PSG, fMRI, structural and diffusion MRI, PET,
+spike recording, calcium imaging (suite2p/caiman), fiber photometry, voltage imaging, animal behavior
+tracking (DeepLabCut/SLEAP), human psychophysics, eye tracking, psychophysiology (incl. EMG),
+experimental design, optogenetics/chemogenetics, human/clinical brain stimulation, histology and
+anatomical tracing, EM connectomics, biophysical and cognitive computational modeling, data standards
+(BIDS/NWB) and dataset access, statistics, connectivity, decoding/encoding, clinical biomarker ML,
+literature search, and figures. See [docs/skills.md](docs/skills.md) for the full index and ownership
+notes. Run `python3 scan_skills.py` to validate structure + registry (also enforced in CI). See
+[CONTRIBUTING.md](CONTRIBUTING.md) to add a skill — known gaps are listed at the bottom of the index.
 
 ## License
 

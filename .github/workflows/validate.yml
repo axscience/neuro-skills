@@ -1,0 +1,22 @@
+name: validate-skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate skill structure and registry
+        # scan_skills.py is stdlib-only (no pip install needed). It checks:
+        # frontmatter schema, metadata.category consistency, required sections
+        # (Overview / When to use / Validation & Pitfalls), routing tables,
+        # dead internal links, and registry.yaml <-> filesystem consistency.
+        run: python3 scan_skills.py

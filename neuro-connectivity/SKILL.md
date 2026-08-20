@@ -7,7 +7,7 @@ compatibility: Examples use MNE-Python's connectivity module for coherence/spect
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: neuro-connectivity
+  category: neuro-connectivity
 ---
 
 # Cross-Modality and Effective Connectivity

@@ -1,0 +1,37 @@
+{
+  "name": "neuro-skills",
+  "owner": {
+    "name": "axscience"
+  },
+  "metadata": {
+    "description": "37 validated neuroscience Agent Skills for Claude Code",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "neuro-skills",
+      "source": "./",
+      "description": "37 validated neuroscience skills \u2014 EEG/MEG/fMRI/PET, spikes, optical imaging, behavior, stimulation, modeling, stats.",
+      "version": "0.2.0",
+      "author": {
+        "name": "axscience"
+      },
+      "homepage": "https://github.com/axscience/neuro-skills",
+      "repository": "https://github.com/axscience/neuro-skills",
+      "license": "MIT",
+      "keywords": [
+        "neuroscience",
+        "electrophysiology",
+        "neuroimaging",
+        "computational-neuroscience",
+        "agent-skills"
+      ],
+      "category": "scientific-research",
+      "tags": [
+        "science",
+        "neuroscience",
+        "ai-scientist"
+      ]
+    }
+  ]
+}

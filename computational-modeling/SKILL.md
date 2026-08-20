@@ -7,7 +7,7 @@ compatibility: Examples target Brian2 2.x for accessibility (pure Python); NEST 
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: computational-modeling
+  category: computational-modeling
 ---
 
 # Computational Modeling (Biophysical / Network Simulation)

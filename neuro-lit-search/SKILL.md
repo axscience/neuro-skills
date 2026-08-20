@@ -7,7 +7,7 @@ compatibility: Assumes access to a search tool (PubMed E-utilities API, Semantic
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: neuro-lit-search
+  category: neuro-lit-search
 ---
 
 # Neuroscience Literature Search

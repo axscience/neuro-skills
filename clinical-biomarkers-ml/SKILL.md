@@ -7,7 +7,7 @@ compatibility: Examples use scikit-learn; interpretability examples use SHAP.
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: clinical-biomarkers-ml
+  category: clinical-biomarkers-ml
 ---
 
 # Clinical Biomarkers and Diagnostic ML

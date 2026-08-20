@@ -7,7 +7,7 @@ compatibility: Examples target PsychoPy 2024.x (Python). Psychtoolbox (MATLAB) c
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: experimental-design
+  category: experimental-design
 ---
 
 # Experimental Design

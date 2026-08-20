@@ -7,7 +7,7 @@ compatibility: This skill is primarily experimental-design and analysis guidance
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: optogenetics-chemogenetics
+  category: optogenetics-chemogenetics
 ---
 
 # Optogenetics and Chemogenetics

@@ -7,7 +7,7 @@ compatibility: Examples use numpy/scipy for algorithm-level processing; `pyedfre
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: eye-tracking
+  category: eye-tracking
 ---
 
 # Eye Tracking

@@ -38,22 +38,42 @@ The closest thing to "just works." Claude Code already has code execution (`Bash
 (if network isn't restricted in your environment) web access.
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/axscience/neuro-skills.git
+cd neuro-skills
 pip install -r requirements.txt   # or a subset — see requirements.txt's comments
 ```
 
-Point Claude Code at this repo's root, or copy individual top-level skill folders (e.g.
-`electrophysiology/`, `mri/`) into wherever your Claude Code setup scans for skills. Confirm network
-access if you need `neuro-data-standards/references/dataset-access.md` or `neuro-lit-search` — some
-sandboxed/restricted environments block it.
+The repo ships a plugin manifest at `.claude-plugin/plugin.json` that lists every top-level skill
+directory, so Claude Code auto-discovers all 37 skills (categories recurse into their leaves) — no
+per-skill wiring. Install the clone as a local plugin, or point Claude Code at the repo directory.
+Confirm network access if you need `neuro-data-standards/references/dataset-access.md` or
+`neuro-lit-search` — some sandboxed/restricted environments block it.
 
-### ChatGPT
+### ChatGPT (Custom GPT)
 
-Different failure mode to watch for: Code Interpreter's execution sandbox is offline by default.
-Uploading skill files as knowledge to a Custom GPT gives the model the *knowledge* — it does not
-give the code-execution sandbox network access. A GLM analysis or spike-sorting skill will work
-fine (local computation only); dataset access or a literature search will not, unless wired up
-separately through Actions (ChatGPT's tool-calling mechanism) pointed at a real API.
+Concrete setup, because "upload the skill files" is too vague when there are 37 of them:
+
+**1. Which files to upload** (as Custom GPT Knowledge files):
+- Always upload `registry.yaml` — it's the index the GPT uses to find the right skill.
+- Upload the `SKILL.md` files for *your* domain, not all 37. For an EEG researcher that's
+  `electrophysiology/SKILL.md` + the references you use (`electrophysiology/references/eeg.md`, etc.)
+  + cross-cutting skills you'll hit (`neuro-stats/SKILL.md`, `neuro-figures/SKILL.md`). Knowledge-file
+  limits (20 files on most tiers) mean you curate to a domain, not the whole repo.
+- For a two-tier category (e.g. `optical-imaging`), upload the category `SKILL.md` **and** the leaf
+  `SKILL.md` files you need (`optical-imaging/suite2p/SKILL.md`), since the router points to them.
+
+**2. System-prompt snippet** (paste into the Custom GPT's Instructions):
+
+> You have neuroscience Agent Skills in your Knowledge files. Before answering a neuroscience
+> methods/analysis question, consult `registry.yaml` to identify the relevant skill by its
+> `description` and `tags`, then read that skill's `SKILL.md` and follow it — especially its
+> "Validation & Pitfalls" section. Do not generate analysis code from memory if a skill covers the
+> task. If the matching skill isn't in your Knowledge files, say so rather than guessing.
+
+**3. Known limitation:** Code Interpreter's execution sandbox is offline by default. Uploading skill
+files gives the model the *knowledge*, not sandbox network access. A GLM or spike-train-stats skill
+works fine (local computation only); the dataset-access and literature-search skills will not,
+unless wired up separately through Actions (ChatGPT's tool-calling mechanism) pointed at a real API.
 
 ### A researcher's own local LLM
 

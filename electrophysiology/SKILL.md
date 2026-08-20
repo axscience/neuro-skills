@@ -7,7 +7,7 @@ compatibility: Examples target MNE-Python 1.7+, the shared toolkit across EEG/ME
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: electrophysiology
+  category: electrophysiology
 ---
 
 # Electrophysiology (EEG / MEG / Intracranial)

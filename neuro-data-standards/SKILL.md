@@ -7,7 +7,7 @@ compatibility: References target pybids 0.16+, pynwb 2.x, dandi-cli/python 0.60+
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: neuro-data-standards
+  category: neuro-data-standards
 ---
 
 # Neuroscience Data Standards

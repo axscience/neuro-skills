@@ -1,0 +1,364 @@
+# Skills registry — machine-readable discovery index.
+#
+# Every skill in the repo has an entry here. Flat skills (single SKILL.md, no
+# leaves) have type: skill. Two-tier skills have a type: category entry for the
+# router and type: skill entries for each leaf, with category linking them.
+#
+# Entry schema:
+#   name         (required) — kebab-case slug; matches the SKILL.md frontmatter `name`
+#   type         (required) — "skill" (a loadable SKILL.md) or "category" (a router over leaves)
+#   sub_type     (required) — tool | method | cross-cutting | category
+#   category     (required) — the top-level category the entry belongs to (self, for categories/flat skills)
+#   path         (required) — repo-relative path to SKILL.md
+#   description  (required) — discovery string; front-load tool/modality keywords
+#   date_added   (required) — ISO-8601
+#   tags         (optional) — cross-cutting discovery tags
+
+entries:
+  # =====================================================================
+  # optical-imaging — category + 4 leaves
+  # =====================================================================
+  - name: "optical-imaging"
+    type: category
+    sub_type: category
+    category: "optical-imaging"
+    path: "optical-imaging/SKILL.md"
+    description: "Optical recording of neural activity — router over calcium imaging (suite2p/caiman), fiber photometry, and voltage imaging leaves."
+    date_added: "2026-08-18"
+    tags: ["imaging", "calcium", "fluorescence"]
+
+  - name: "suite2p"
+    type: skill
+    sub_type: tool
+    category: "optical-imaging"
+    path: "optical-imaging/suite2p/SKILL.md"
+    description: "Two-photon/widefield calcium imaging with Suite2p: registration, classifier-based ROI detection, neuropil correction, dF/F."
+    date_added: "2026-08-18"
+    tags: ["calcium", "two-photon", "roi-extraction"]
+
+  - name: "caiman"
+    type: skill
+    sub_type: tool
+    category: "optical-imaging"
+    path: "optical-imaging/caiman/SKILL.md"
+    description: "Calcium imaging with CaImAn: NoRMCorre motion correction, CNMF/CNMF-E source extraction (incl. 1-photon miniscope), deconvolution."
+    date_added: "2026-08-18"
+    tags: ["calcium", "cnmf", "miniscope", "roi-extraction"]
+
+  - name: "fiber-photometry"
+    type: skill
+    sub_type: method
+    category: "optical-imaging"
+    path: "optical-imaging/fiber-photometry/SKILL.md"
+    description: "Bulk fiber photometry: isosbestic-corrected dF/F, photobleaching correction, peri-event alignment; GCaMP and dLight/GRAB sensors."
+    date_added: "2026-08-18"
+    tags: ["photometry", "dopamine", "reward"]
+
+  - name: "voltage-imaging"
+    type: skill
+    sub_type: method
+    category: "optical-imaging"
+    path: "optical-imaging/voltage-imaging/SKILL.md"
+    description: "Voltage imaging with GEVIs: bandpass denoising and spike detection from high-speed, low-SNR fluorescence traces."
+    date_added: "2026-08-18"
+    tags: ["voltage", "gevi", "spike-detection"]
+
+  # =====================================================================
+  # spike-recording — category + 2 leaves
+  # =====================================================================
+  - name: "spike-recording"
+    type: category
+    sub_type: category
+    category: "spike-recording"
+    path: "spike-recording/SKILL.md"
+    description: "Extracellular single/multi-unit recording — router over spike sorting (SpikeInterface) and spike-train statistics."
+    date_added: "2026-08-18"
+    tags: ["ephys", "spike-sorting"]
+
+  - name: "spikeinterface"
+    type: skill
+    sub_type: tool
+    category: "spike-recording"
+    path: "spike-recording/spikeinterface/SKILL.md"
+    description: "Spike sorting raw extracellular voltage into single-unit spike times with SpikeInterface — preprocessing, running a sorter (Kilosort/Mountainsort), quality metrics, curation."
+    date_added: "2026-08-18"
+    tags: ["spike-sorting", "kilosort", "mountainsort", "neuropixels"]
+
+  - name: "spike-train-stats"
+    type: skill
+    sub_type: method
+    category: "spike-recording"
+    path: "spike-recording/spike-train-stats/SKILL.md"
+    description: "Spike-train statistics from sorted spike times — ISI, firing rate, PSTH, CV, Fano factor. Tool-agnostic (numpy only)."
+    date_added: "2026-08-18"
+    tags: ["spike-trains", "psth", "firing-rate"]
+
+  # =====================================================================
+  # animal-behavior-tracking — category + 3 leaves
+  # =====================================================================
+  - name: "animal-behavior-tracking"
+    type: category
+    sub_type: category
+    category: "animal-behavior-tracking"
+    path: "animal-behavior-tracking/SKILL.md"
+    description: "Markerless animal pose estimation and kinematic analysis — router over DeepLabCut, SLEAP, and kinematics leaves."
+    date_added: "2026-08-18"
+    tags: ["behavior", "pose-estimation", "video"]
+
+  - name: "deeplabcut"
+    type: skill
+    sub_type: tool
+    category: "animal-behavior-tracking"
+    path: "animal-behavior-tracking/deeplabcut/SKILL.md"
+    description: "Markerless animal pose estimation with DeepLabCut — project creation, frame labeling, keypoint model training, video analysis."
+    date_added: "2026-08-18"
+    tags: ["dlc", "pose-estimation", "single-animal"]
+
+  - name: "sleap"
+    type: skill
+    sub_type: tool
+    category: "animal-behavior-tracking"
+    path: "animal-behavior-tracking/sleap/SKILL.md"
+    description: "Markerless animal pose estimation with SLEAP — labeling, training, inference, with strong native multi-animal identity tracking."
+    date_added: "2026-08-18"
+    tags: ["pose-estimation", "multi-animal"]
+
+  - name: "kinematics"
+    type: skill
+    sub_type: method
+    category: "animal-behavior-tracking"
+    path: "animal-behavior-tracking/kinematics/SKILL.md"
+    description: "Kinematic analysis from pose-tracking keypoints — velocity, speed, joint angles, smoothing. Tool-agnostic (DLC or SLEAP output)."
+    date_added: "2026-08-18"
+    tags: ["kinematics", "joint-angles", "velocity"]
+
+  # =====================================================================
+  # cognitive-computational-modeling — category + 3 leaves
+  # =====================================================================
+  - name: "cognitive-computational-modeling"
+    type: category
+    sub_type: category
+    category: "cognitive-computational-modeling"
+    path: "cognitive-computational-modeling/SKILL.md"
+    description: "Computational models of behavior and decision-making — router over hBayesDM (R/Stan), DDM in Python (HDDM/PyDDM), and custom PyMC models."
+    date_added: "2026-08-19"
+    tags: ["decision-making", "reinforcement-learning", "ddm", "bayesian"]
+
+  - name: "hbayesdm"
+    type: skill
+    sub_type: tool
+    category: "cognitive-computational-modeling"
+    path: "cognitive-computational-modeling/hbayesdm/SKILL.md"
+    description: "Pre-built hierarchical Bayesian decision models via hBayesDM (R/Stan) — RL, DDM, prospect theory, delay discounting for standard task structures."
+    date_added: "2026-08-19"
+    tags: ["hbayesdm", "stan", "hierarchical-bayesian", "reinforcement-learning"]
+
+  - name: "ddm-python"
+    type: skill
+    sub_type: tool
+    category: "cognitive-computational-modeling"
+    path: "cognitive-computational-modeling/ddm-python/SKILL.md"
+    description: "Drift-diffusion modeling in Python — HDDM for hierarchical Bayesian DDM, PyDDM for flexible model specification with custom drift/bound functions."
+    date_added: "2026-08-19"
+    tags: ["ddm", "hddm", "pyddm", "reaction-time"]
+
+  - name: "pymc-cognitive"
+    type: skill
+    sub_type: tool
+    category: "cognitive-computational-modeling"
+    path: "cognitive-computational-modeling/pymc-cognitive/SKILL.md"
+    description: "Custom hierarchical cognitive models in PyMC — RL, Bayesian observer, prospect theory, or any model not covered by hBayesDM's pre-built library."
+    date_added: "2026-08-19"
+    tags: ["pymc", "custom-model", "hierarchical-bayesian", "model-based-fmri"]
+
+  # =====================================================================
+  # Flat skills — single SKILL.md, no leaves
+  # =====================================================================
+  - name: "brain-stimulation"
+    type: skill
+    sub_type: method
+    category: "brain-stimulation"
+    path: "brain-stimulation/SKILL.md"
+    description: "Human non-invasive and invasive brain stimulation — TMS-EEG, tDCS/tACS, and clinical DBS programming/presurgical mapping."
+    date_added: "2026-08-19"
+    tags: ["tms", "tdcs", "tacs", "dbs", "clinical"]
+
+  - name: "clinical-biomarkers-ml"
+    type: skill
+    sub_type: cross-cutting
+    category: "clinical-biomarkers-ml"
+    path: "clinical-biomarkers-ml/SKILL.md"
+    description: "Diagnostic/prognostic classification from neuroscience data — class imbalance, external validation, interpretability for clinical claims."
+    date_added: "2026-08-19"
+    tags: ["clinical", "classification", "machine-learning", "biomarker"]
+
+  - name: "computational-modeling"
+    type: skill
+    sub_type: tool
+    category: "computational-modeling"
+    path: "computational-modeling/SKILL.md"
+    description: "Biophysical and network simulation of neurons and circuits — NEURON/Brian2/NEST spiking models, fitting to recorded data."
+    date_added: "2026-08-19"
+    tags: ["neuron", "brian2", "nest", "biophysical", "spiking-network"]
+
+  - name: "connectomics-em"
+    type: skill
+    sub_type: method
+    category: "connectomics-em"
+    path: "connectomics-em/SKILL.md"
+    description: "Electron-microscopy connectomics — volumetric EM data, neuron segmentation/reconstruction, synapse detection, Neuroglancer."
+    date_added: "2026-08-19"
+    tags: ["connectomics", "electron-microscopy", "segmentation", "neuroglancer"]
+
+  - name: "electrophysiology"
+    type: skill
+    sub_type: tool
+    category: "electrophysiology"
+    path: "electrophysiology/SKILL.md"
+    description: "EEG/MEG/intracranial field-potential recording (MNE-Python) — filtering, ICA, epoching, ERP/ERF, source localization, time-frequency."
+    date_added: "2026-08-18"
+    tags: ["eeg", "meg", "ecog", "seeg", "mne"]
+
+  - name: "experimental-design"
+    type: skill
+    sub_type: cross-cutting
+    category: "experimental-design"
+    path: "experimental-design/SKILL.md"
+    description: "Stimulus presentation and task-building (PsychoPy/Psychtoolbox), trigger/event coding, multi-device timing synchronization."
+    date_added: "2026-08-19"
+    tags: ["psychopy", "psychtoolbox", "triggers", "timing"]
+
+  - name: "eye-tracking"
+    type: skill
+    sub_type: method
+    category: "eye-tracking"
+    path: "eye-tracking/SKILL.md"
+    description: "Eye-tracking data processing — fixation/saccade detection, blink handling, pupillometry, for EDF/Tobii formats."
+    date_added: "2026-08-19"
+    tags: ["eye-tracking", "fixation", "saccade", "pupillometry"]
+
+  - name: "fnirs"
+    type: skill
+    sub_type: tool
+    category: "fnirs"
+    path: "fnirs/SKILL.md"
+    description: "Functional near-infrared spectroscopy (fNIRS) with MNE-NIRS — optode arrays, HbO/HbR conversion, motion artifact correction, GLM analysis."
+    date_added: "2026-08-19"
+    tags: ["fnirs", "hemoglobin", "mne-nirs", "optical"]
+
+  - name: "histology-and-anatomical-tracing"
+    type: skill
+    sub_type: method
+    category: "histology-and-anatomical-tracing"
+    path: "histology-and-anatomical-tracing/SKILL.md"
+    description: "Anatomical circuit mapping from tissue — viral tracing, immunohistochemistry, tissue clearing (iDISCO/CLARITY), atlas registration, cell counting (QuPath/ClearMap)."
+    date_added: "2026-08-19"
+    tags: ["histology", "tracing", "clearing", "atlas", "qupath"]
+
+  - name: "human-psychophysics"
+    type: skill
+    sub_type: method
+    category: "human-psychophysics"
+    path: "human-psychophysics/SKILL.md"
+    description: "Psychophysical methods for human behavioral data — adaptive staircases, signal detection theory (d'/criterion), psychometric function fitting, RT analysis."
+    date_added: "2026-08-19"
+    tags: ["psychophysics", "sdt", "staircase", "psychometric-function"]
+
+  - name: "mri"
+    type: skill
+    sub_type: method
+    category: "mri"
+    path: "mri/SKILL.md"
+    description: "Structural, functional (fMRI), and diffusion MRI — preprocessing, GLM/connectivity, morphometry, tractography."
+    date_added: "2026-08-19"
+    tags: ["fmri", "structural-mri", "diffusion", "glm", "fsl", "freesurfer"]
+
+  - name: "neuro-connectivity"
+    type: skill
+    sub_type: cross-cutting
+    category: "neuro-connectivity"
+    path: "neuro-connectivity/SKILL.md"
+    description: "Cross-modality connectivity methods — coherence, Granger causality, DCM, graph-theory metrics, spanning fMRI/MEG/EEG/ECoG."
+    date_added: "2026-08-19"
+    tags: ["connectivity", "granger", "dcm", "graph-theory", "coherence"]
+
+  - name: "neuro-data-standards"
+    type: skill
+    sub_type: cross-cutting
+    category: "neuro-data-standards"
+    path: "neuro-data-standards/SKILL.md"
+    description: "BIDS and NWB data standards — validation, querying, and fetching public datasets from DANDI, OpenNeuro, Allen Institute."
+    date_added: "2026-08-19"
+    tags: ["bids", "nwb", "dandi", "openneuro", "allen-institute"]
+
+  - name: "neuro-decoding-encoding"
+    type: skill
+    sub_type: cross-cutting
+    category: "neuro-decoding-encoding"
+    path: "neuro-decoding-encoding/SKILL.md"
+    description: "Decoding (predict stimulus/behavior from neural data) and encoding models (TRF/mTRF, RSA) — modality-agnostic, scikit-learn-based, with leakage-safe cross-validation."
+    date_added: "2026-08-19"
+    tags: ["decoding", "encoding", "rsa", "trf", "cross-validation"]
+
+  - name: "neuro-figures"
+    type: skill
+    sub_type: cross-cutting
+    category: "neuro-figures"
+    path: "neuro-figures/SKILL.md"
+    description: "Publication-quality neuroscience figures — raster/PSTH plots, ERP traces, brain overlays, connectivity matrices."
+    date_added: "2026-08-19"
+    tags: ["figures", "visualization", "publication", "matplotlib"]
+
+  - name: "neuro-lit-search"
+    type: skill
+    sub_type: cross-cutting
+    category: "neuro-lit-search"
+    path: "neuro-lit-search/SKILL.md"
+    description: "Literature search query formulation and synthesis for neuroscience — requires an actual search tool (PubMed, web search) to be available."
+    date_added: "2026-08-19"
+    tags: ["literature", "pubmed", "search", "citations"]
+
+  - name: "neuro-stats"
+    type: skill
+    sub_type: cross-cutting
+    category: "neuro-stats"
+    path: "neuro-stats/SKILL.md"
+    description: "Cross-modality statistics — cluster permutation, multiple-comparison correction, mixed-effects models, power analysis."
+    date_added: "2026-08-18"
+    tags: ["statistics", "permutation", "mixed-effects", "power-analysis"]
+
+  - name: "optogenetics-chemogenetics"
+    type: skill
+    sub_type: method
+    category: "optogenetics-chemogenetics"
+    path: "optogenetics-chemogenetics/SKILL.md"
+    description: "Causal circuit manipulation in animals — optogenetics (opsins, light delivery) and chemogenetics (DREADDs), experimental design, stimulation-locked analysis."
+    date_added: "2026-08-19"
+    tags: ["optogenetics", "chemogenetics", "dreadd", "opsin", "causal"]
+
+  - name: "pet-imaging"
+    type: skill
+    sub_type: method
+    category: "pet-imaging"
+    path: "pet-imaging/SKILL.md"
+    description: "PET analysis — tracer kinetic modeling, SUVR computation, partial volume correction, PET-MRI coregistration."
+    date_added: "2026-08-19"
+    tags: ["pet", "tracer", "suvr", "kinetic-modeling"]
+
+  - name: "psychophysiology"
+    type: skill
+    sub_type: method
+    category: "psychophysiology"
+    path: "psychophysiology/SKILL.md"
+    description: "Peripheral autonomic and neuromuscular measures — skin conductance (SCR/EDA), heart-rate variability (HRV), respiration, EMG."
+    date_added: "2026-08-19"
+    tags: ["scr", "eda", "hrv", "emg", "autonomic"]
+
+  - name: "sleep-eeg"
+    type: skill
+    sub_type: tool
+    category: "sleep-eeg"
+    path: "sleep-eeg/SKILL.md"
+    description: "Polysomnography processing — AASM sleep stage scoring, spindle/slow-oscillation/K-complex detection via YASA."
+    date_added: "2026-08-19"
+    tags: ["sleep", "psg", "yasa", "spindle", "slow-oscillation"]

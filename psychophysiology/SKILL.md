@@ -7,7 +7,7 @@ compatibility: Examples use numpy/scipy/neurokit2. NeuroKit2 covers most of this
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: psychophysiology
+  category: psychophysiology
 ---
 
 # Psychophysiology

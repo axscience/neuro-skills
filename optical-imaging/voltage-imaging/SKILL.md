@@ -1,15 +1,37 @@
+---
+name: voltage-imaging
+description: "Voltage imaging analysis with genetically encoded voltage indicators (GEVIs) — bandpass denoising and spike detection from high-speed, low-SNR fluorescence traces. Reports membrane potential directly and much faster than calcium indicators, at far lower SNR. For calcium imaging (higher SNR, slower kinetics), use suite2p or caiman instead."
+license: MIT
+allowed-tools: Read Write Edit Bash
+compatibility: Examples use numpy/scipy. Frame rates are typically 500-1000+ Hz vs. ~30 Hz for calcium imaging, with correspondingly larger data volumes.
+metadata:
+  version: "1.0"
+  skill-author: neuro-skills contributors
+  category: optical-imaging
+---
+
 # Voltage Imaging
 
-Modality-specific detail for [../SKILL.md](../SKILL.md). Genetically encoded voltage indicators
-(GEVIs) report membrane potential changes directly and much faster than calcium indicators, at the
-cost of substantially lower signal-to-noise ratio and much higher required frame rates (often
-500-1000+ Hz vs. ~30 Hz for calcium imaging).
+## Overview
 
-## Core processing differences from calcium imaging
+Genetically encoded voltage indicators (GEVIs) report membrane potential changes directly and much
+faster than calcium indicators, at the cost of substantially lower signal-to-noise ratio and much
+higher required frame rates (often 500-1000+ Hz vs. ~30 Hz for calcium imaging). This is a leaf of
+the `optical-imaging` category.
 
-The motion-correction and ROI-extraction concepts from
-[calcium-imaging.md](calcium-imaging.md) carry over, but voltage imaging's much lower per-frame SNR
-changes what's needed downstream:
+## When to use this skill
+
+Activate when the request involves:
+- Voltage imaging, GEVI, genetically encoded voltage indicator, ASAP/Voltron/paQuasAr-class sensors
+- Terms: subthreshold voltage, high-speed imaging, spike detection from optical traces, SNR-limited
+- "Detect spikes in this voltage-imaging trace," "denoise a GEVI recording," "why is my voltage SNR so low"
+
+## Core usage
+
+### Denoising and spike detection
+
+The motion-correction and ROI concepts from the `suite2p`/`caiman` leaves carry over, but voltage
+imaging's much lower per-frame SNR changes what's needed downstream:
 
 ```python
 import numpy as np

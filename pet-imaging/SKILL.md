@@ -7,7 +7,7 @@ compatibility: Examples use nibabel/nipype-adjacent tooling; several steps (part
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: pet-imaging
+  category: pet-imaging
 ---
 
 # PET Imaging

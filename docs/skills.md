@@ -1,7 +1,10 @@
 # Skill index
 
-25 top-level skills, 22 nested references. Run `python scan_skills.py` to validate before
-regenerating by hand.
+**37 skills** (21 flat + 4 two-tier categories + 12 leaves) and 22 nested references. The
+machine-readable version is [`registry.yaml`](../registry.yaml); this file is the human index. Run
+`python3 scan_skills.py` to validate structure + registry before regenerating by hand.
+
+Two-tier categories (a router `SKILL.md` over per-tool/per-method leaf skills) are marked **▸** below.
 
 ## By modality (recording/imaging data)
 
@@ -16,11 +19,9 @@ regenerating by hand.
 | Structural MRI | [mri](../mri/SKILL.md) → [references/structural.md](../mri/references/structural.md) |
 | Diffusion MRI | [mri](../mri/SKILL.md) → [references/diffusion.md](../mri/references/diffusion.md) |
 | PET | [pet-imaging](../pet-imaging/SKILL.md) |
-| Spikes / single-unit / extracellular | [spike-recording](../spike-recording/SKILL.md) |
-| Two-photon / widefield calcium imaging | [optical-imaging](../optical-imaging/SKILL.md) → [references/calcium-imaging.md](../optical-imaging/references/calcium-imaging.md) |
-| Fiber photometry | [optical-imaging](../optical-imaging/SKILL.md) → [references/fiber-photometry.md](../optical-imaging/references/fiber-photometry.md) |
-| Voltage imaging | [optical-imaging](../optical-imaging/SKILL.md) → [references/voltage-imaging.md](../optical-imaging/references/voltage-imaging.md) |
-| Animal pose/kinematics | [animal-behavior-tracking](../animal-behavior-tracking/SKILL.md) |
+| Spikes / single-unit / extracellular | **▸** [spike-recording](../spike-recording/SKILL.md) → [spikeinterface](../spike-recording/spikeinterface/SKILL.md) (sorting), [spike-train-stats](../spike-recording/spike-train-stats/SKILL.md) (analysis) |
+| Calcium / photometry / voltage imaging | **▸** [optical-imaging](../optical-imaging/SKILL.md) → [suite2p](../optical-imaging/suite2p/SKILL.md), [caiman](../optical-imaging/caiman/SKILL.md), [fiber-photometry](../optical-imaging/fiber-photometry/SKILL.md), [voltage-imaging](../optical-imaging/voltage-imaging/SKILL.md) |
+| Animal pose/kinematics | **▸** [animal-behavior-tracking](../animal-behavior-tracking/SKILL.md) → [deeplabcut](../animal-behavior-tracking/deeplabcut/SKILL.md), [sleap](../animal-behavior-tracking/sleap/SKILL.md), [kinematics](../animal-behavior-tracking/kinematics/SKILL.md) |
 | Human psychophysics/behavior | [human-psychophysics](../human-psychophysics/SKILL.md) |
 | Eye tracking | [eye-tracking](../eye-tracking/SKILL.md) |
 | SCR/HRV/respiration | [psychophysiology](../psychophysiology/SKILL.md) |
@@ -39,7 +40,7 @@ technique table below.
 | Viral tracing, IHC, tissue clearing, cell counting | [histology-and-anatomical-tracing](../histology-and-anatomical-tracing/SKILL.md) |
 | Task/stimulus delivery, trigger coding, timing sync | [experimental-design](../experimental-design/SKILL.md) |
 | Biophysical/network simulation (NEURON/Brian2/NEST) | [computational-modeling](../computational-modeling/SKILL.md) |
-| Behavioral/decision modeling (RL, DDM, Bayesian observer) | [cognitive-computational-modeling](../cognitive-computational-modeling/SKILL.md) |
+| Behavioral/decision modeling (RL, DDM, Bayesian observer) | **▸** [cognitive-computational-modeling](../cognitive-computational-modeling/SKILL.md) → [hbayesdm](../cognitive-computational-modeling/hbayesdm/SKILL.md), [ddm-python](../cognitive-computational-modeling/ddm-python/SKILL.md), [pymc-cognitive](../cognitive-computational-modeling/pymc-cognitive/SKILL.md) |
 | BIDS/NWB standards + practical dataset access (DANDI/OpenNeuro/Allen) | [neuro-data-standards](../neuro-data-standards/SKILL.md) → [references/dataset-access.md](../neuro-data-standards/references/dataset-access.md) |
 | Cluster permutation, multiple comparisons, mixed models, power analysis | [neuro-stats](../neuro-stats/SKILL.md) → [references/clinical-stats.md](../neuro-stats/references/clinical-stats.md) (survival analysis, longitudinal, ComBat) |
 | Coherence, Granger causality, DCM, graph theory | [neuro-connectivity](../neuro-connectivity/SKILL.md) |

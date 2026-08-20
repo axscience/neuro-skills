@@ -7,7 +7,7 @@ compatibility: Examples target YASA 0.6+ (built on MNE-Python).
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: sleep-eeg
+  category: sleep-eeg
 ---
 
 # Sleep EEG (Polysomnography)

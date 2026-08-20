@@ -7,7 +7,7 @@ compatibility: Examples use MNE-Python's cluster-permutation implementation, sta
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: neuro-stats
+  category: neuro-stats
 ---
 
 # Neuroscience Statistics

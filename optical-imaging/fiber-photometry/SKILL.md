@@ -1,11 +1,35 @@
+---
+name: fiber-photometry
+description: "Bulk fiber photometry analysis — isosbestic-corrected dF/F, motion/photobleaching correction, and peri-event alignment. One signal per fiber/site (no spatial resolution), heavily used for GCaMP and neurotransmitter sensors (dLight/GRAB) in decision/reward neuroscience. For spatially-resolved single-cell calcium, use suite2p or caiman instead."
+license: MIT
+allowed-tools: Read Write Edit Bash
+compatibility: Examples use numpy/scipy; GuPPy and pMAT are common domain-specific alternatives for the same pipeline.
+metadata:
+  version: "1.0"
+  skill-author: neuro-skills contributors
+  category: optical-imaging
+---
+
 # Fiber Photometry
 
-Modality-specific detail for [../SKILL.md](../SKILL.md). Bulk fluorescence from a single fiber/site
-— no spatial resolution, but simple, robust, and heavily used for calcium (GCaMP) and, especially in
-decision/reward neuroscience, neurotransmitter sensors (dLight for dopamine, GRAB sensors for other
-transmitters). The core processing pipeline is the same regardless of which sensor is used.
+## Overview
 
-## Isosbestic-corrected dF/F
+Fiber photometry records bulk fluorescence from a single fiber/site — no spatial resolution, but
+simple, robust, and heavily used for calcium (GCaMP) and, especially in decision/reward neuroscience,
+neurotransmitter sensors (dLight for dopamine, GRAB sensors for other transmitters). The core
+processing pipeline is the same regardless of which sensor is used. This is a leaf of the
+`optical-imaging` category.
+
+## When to use this skill
+
+Activate when the request involves:
+- Fiber photometry, bulk fluorescence, dLight, GRAB sensor, single-site GCaMP recording
+- Terms: isosbestic, 405/465 channels, motion correction, peri-event dF/F, GuPPy, pMAT
+- "Process this photometry recording," "isosbestic-correct this signal," "align dF/F to my events"
+
+## Core usage
+
+### Isosbestic-corrected dF/F
 
 The standard photometry setup records two channels: the signal wavelength (indicator-sensitive) and
 an isosbestic control wavelength (indicator fluoresces here too, but not activity-sensitively) —
@@ -30,7 +54,7 @@ def isosbestic_dff(signal_channel, control_channel):
     return (signal_channel - fitted_control) / fitted_control
 ```
 
-## Event-aligned photometry (peri-event dF/F)
+### Event-aligned photometry (peri-event dF/F)
 
 ```python
 def peri_event_dff(dff_trace, timestamps, event_times, window=(-2, 5), fs=30):

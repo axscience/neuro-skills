@@ -1,0 +1,50 @@
+{
+  "name": "neuro-skills",
+  "description": "Open, validated Agent Skills for neuroscience research \u2014 37 skills across EEG/MEG/intracranial, fMRI/PET, spikes, optical imaging, behavior, stimulation, computational modeling, and cross-cutting statistics/connectivity/decoding. Every skill carries a cited Validation & Pitfalls section.",
+  "version": "0.2.0",
+  "author": {
+    "name": "axscience"
+  },
+  "homepage": "https://github.com/axscience/neuro-skills",
+  "repository": "https://github.com/axscience/neuro-skills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "neuroscience",
+    "eeg",
+    "meg",
+    "fmri",
+    "electrophysiology",
+    "calcium-imaging",
+    "spike-sorting",
+    "connectomics",
+    "computational-neuroscience"
+  ],
+  "skills": [
+    "./animal-behavior-tracking/",
+    "./brain-stimulation/",
+    "./clinical-biomarkers-ml/",
+    "./cognitive-computational-modeling/",
+    "./computational-modeling/",
+    "./connectomics-em/",
+    "./electrophysiology/",
+    "./experimental-design/",
+    "./eye-tracking/",
+    "./fnirs/",
+    "./histology-and-anatomical-tracing/",
+    "./human-psychophysics/",
+    "./mri/",
+    "./neuro-connectivity/",
+    "./neuro-data-standards/",
+    "./neuro-decoding-encoding/",
+    "./neuro-figures/",
+    "./neuro-lit-search/",
+    "./neuro-stats/",
+    "./optical-imaging/",
+    "./optogenetics-chemogenetics/",
+    "./pet-imaging/",
+    "./psychophysiology/",
+    "./sleep-eeg/",
+    "./spike-recording/"
+  ]
+}

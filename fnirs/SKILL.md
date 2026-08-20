@@ -7,7 +7,7 @@ compatibility: Examples target MNE-NIRS 0.6+ (built on MNE-Python).
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: fnirs
+  category: fnirs
 ---
 
 # fNIRS

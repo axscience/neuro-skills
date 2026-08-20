@@ -7,7 +7,7 @@ compatibility: Examples use scikit-learn 1.3+.
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: neuro-decoding-encoding
+  category: neuro-decoding-encoding
 ---
 
 # Neural Decoding and Encoding

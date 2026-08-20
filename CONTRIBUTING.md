@@ -33,14 +33,30 @@ content drifts out of sync as one copy gets updated and the others don't.
 
 ## 2. Folder layout
 
+Most skills are **flat** — one `SKILL.md` plus optional `references/`:
+
 ```
-<modality-or-technique>/
-  SKILL.md              # required — overview + core usage + routing table (if references/ exists) + validation
+<category>/
+  SKILL.md              # required — overview + when-to-use + core usage + routing table (if references/) + validation
   references/             # optional — one file per sub-topic, loaded on demand
     <sub-topic>.md
 ```
 
-`<modality-or-technique>` and `<sub-topic>` are kebab-case and match the `name`/filename respectively.
+A modality with **genuinely competing tools for the same job** (or a clean tool/method seam users
+invoke independently) becomes **two-tier** — a category router `SKILL.md` over per-tool/per-method
+leaf skills:
+
+```
+<category>/
+  SKILL.md              # category router — includes a "Which leaf skill to load" table linking every leaf
+  <leaf>/SKILL.md         # a per-tool or per-method leaf skill
+```
+
+Don't split a skill that has a single dominant tool (e.g. `electrophysiology` = MNE) or is genuinely
+cross-cutting (e.g. `neuro-stats`) — that's churn for no gain. Split only when multiple real tools
+compete (e.g. `optical-imaging` → suite2p / caiman) or there's a clean acquisition/analysis seam
+(e.g. `spike-recording` → spikeinterface / spike-train-stats). All directory and file names are
+kebab-case and match the `name`/filename.
 
 ## 3. `SKILL.md` frontmatter
 
@@ -54,9 +70,33 @@ compatibility: Version/environment notes for the underlying library, if relevant
 metadata:
   version: "1.0"
   skill-author: <your name or handle>
-  modality: <matches the top-level folder name exactly>
+  category: <the top-level category folder name — for a flat skill or category router, its own folder; for a leaf, its parent category>
 ---
 ```
+
+`metadata.category` is required and validated. The older `metadata.modality` field is **rejected** —
+use `category`.
+
+## 3a. Register the skill
+
+Every `SKILL.md` needs an entry in `registry.yaml` (the machine-readable discovery index agents and
+the Claude Code / Cursor / ChatGPT integrations consume). Add:
+
+```yaml
+  - name: "skill-name"           # matches frontmatter name
+    type: skill                    # "skill" for a flat skill or leaf; "category" for a router
+    sub_type: tool                  # tool | method | cross-cutting | category
+    category: "top-level-folder"     # the path's first segment
+    path: "top-level-folder/.../SKILL.md"
+    description: "Front-load tool/modality keywords — this is the discovery string."
+    date_added: "YYYY-MM-DD"
+    tags: ["..."]                     # optional
+```
+
+`scan_skills.py` cross-checks the registry against the filesystem (every SKILL.md has exactly one
+entry, paths resolve, names/categories match), so a missing or drifted entry fails CI. Also add the
+new top-level directory to `.claude-plugin/plugin.json`'s `skills` array if it's a new category/flat
+skill (leaves are picked up automatically by their category directory).
 
 ## 4. `SKILL.md` body
 

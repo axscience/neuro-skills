@@ -7,7 +7,7 @@ compatibility: References QuPath (Groovy/Java scripting + Python bridge) and Cle
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: histology-and-anatomical-tracing
+  category: histology-and-anatomical-tracing
 ---
 
 # Histology and Anatomical Tracing

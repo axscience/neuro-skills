@@ -7,7 +7,7 @@ compatibility: References target fMRIPrep 23.x, nilearn 0.10+, and FSL/MRtrix3 f
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: mri
+  category: mri
 ---
 
 # MRI (Structural / Functional / Diffusion)

@@ -7,7 +7,7 @@ compatibility: References target TESA (TMS-EEG artifact removal, MATLAB/EEGLAB-b
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: brain-stimulation
+  category: brain-stimulation
 ---
 
 # Brain Stimulation (Human / Clinical)

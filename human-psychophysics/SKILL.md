@@ -7,7 +7,7 @@ compatibility: Examples use numpy/scipy; psychometric fitting shown via scipy.op
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: human-psychophysics
+  category: human-psychophysics
 ---
 
 # Human Psychophysics

@@ -7,7 +7,7 @@ compatibility: Examples use matplotlib; brain surface/volume plotting additional
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: neuro-figures
+  category: neuro-figures
 ---
 
 # Neuroscience Figures

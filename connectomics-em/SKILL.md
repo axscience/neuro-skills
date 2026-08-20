@@ -7,7 +7,7 @@ compatibility: Examples use CloudVolume (Python) for volumetric EM data access; 
 metadata:
   version: "1.0"
   skill-author: neuro-skills contributors
-  modality: connectomics-em
+  category: connectomics-em
 ---
 
 # EM Connectomics
