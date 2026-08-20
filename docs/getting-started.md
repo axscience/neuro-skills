@@ -1,26 +1,14 @@
 # Getting started
 
-This repo provides **skills** — knowledge, not capability. Every skill here assumes the agent
+This repo provides **skills** . Every skill here assumes the agent
 reading it already has generic tools (execute code, read/write files, and for some skills, reach
 the internet) and tells it how to use those tools correctly for a specific neuroscience task. It
 doesn't add new abilities to an agent; it grounds abilities the agent already has in validated,
 citation-backed practice instead of whatever the model happens to remember.
 
-That means turning this repo into "Claude/ChatGPT/my local LLM actually helps me with neuro
-analysis" requires two things, not one:
-
-1. **The skills** (this repo) — what to do, and what goes wrong if you do it carelessly.
-2. **The environment** — a code execution tool with the right packages installed, and for some
-   skills, internet access. This repo doesn't provide this part; you have to set it up.
-
-Skip either one and something breaks: skills without the right packages installed means correct
-code that can't run; environment without skills means an agent generating plausible-looking but
-uninformed analysis code from memory — the exact failure mode this repo exists to prevent.
-
 ## What needs internet access, and what doesn't
 
-Most skills here (preprocessing, analysis, modeling) only need local code execution — once data is
-in hand, nothing about spike-train statistics or an fMRI GLM requires network access. Two
+Most skills here (preprocessing, analysis, modeling) only need local code execution. Two
 categories are different:
 
 - **Acquisition skills** (`dandi-archive-access`, `allen-brain-observatory-access`,
@@ -34,7 +22,7 @@ categories are different:
 
 ### Claude Code
 
-The closest thing to "just works." Claude Code already has code execution (`Bash`), file I/O, and
+Claude Code already has code execution (`Bash`), file I/O, and
 (if network isn't restricted in your environment) web access.
 
 ```bash
@@ -44,20 +32,17 @@ pip install -r requirements.txt   # or a subset — see requirements.txt's comme
 ```
 
 The repo ships a plugin manifest at `.claude-plugin/plugin.json` that lists every top-level skill
-directory, so Claude Code auto-discovers all 37 skills (categories recurse into their leaves) — no
-per-skill wiring. Install the clone as a local plugin, or point Claude Code at the repo directory.
+directory, so Claude Code auto-discovers all 37 skills (categories recurse into their leaves). Install the clone as a local plugin, or point Claude Code at the repo directory.
 Confirm network access if you need `neuro-data-standards/references/dataset-access.md` or
 `neuro-lit-search` — some sandboxed/restricted environments block it.
 
 ### ChatGPT (Custom GPT)
 
-Concrete setup, because "upload the skill files" is too vague when there are 37 of them:
-
 **1. Which files to upload** (as Custom GPT Knowledge files):
 - Always upload `registry.yaml` — it's the index the GPT uses to find the right skill.
-- Upload the `SKILL.md` files for *your* domain, not all 37. For an EEG researcher that's
+- Upload the `SKILL.md` files. Can also upload only the files for *your* domain. For an EEG researcher that's
   `electrophysiology/SKILL.md` + the references you use (`electrophysiology/references/eeg.md`, etc.)
-  + cross-cutting skills you'll hit (`neuro-stats/SKILL.md`, `neuro-figures/SKILL.md`). Knowledge-file
+  + (`neuro-stats/SKILL.md`, `neuro-figures/SKILL.md`). Knowledge-file
   limits (20 files on most tiers) mean you curate to a domain, not the whole repo.
 - For a two-tier category (e.g. `optical-imaging`), upload the category `SKILL.md` **and** the leaf
   `SKILL.md` files you need (`optical-imaging/suite2p/SKILL.md`), since the router points to them.
