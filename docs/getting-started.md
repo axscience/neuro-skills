@@ -43,7 +43,7 @@ Confirm network access if you need `neuro-data-standards/references/dataset-acce
 - Upload the `SKILL.md` files. Can also upload only the files for *your* domain. For an EEG researcher that's
   `electrophysiology/SKILL.md` + the references you use (`electrophysiology/references/eeg.md`, etc.)
   + (`neuro-stats/SKILL.md`, `neuro-figures/SKILL.md`). Knowledge-file
-  limits (20 files on most tiers) mean you curate to a domain, not the whole repo.
+  limits (20 files per Custom GPT) mean you curate to a domain, not the whole repo.
 - For a two-tier category (e.g. `optical-imaging`), upload the category `SKILL.md` **and** the leaf
   `SKILL.md` files you need (`optical-imaging/suite2p/SKILL.md`), since the router points to them.
 
